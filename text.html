@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffebee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #e91e63;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        
+        .heart {
+            font-size: 100px;
+            color: #e91e63;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+            margin-bottom: 20px;
+        }
+        
+        .hidden-message {
+            display: none;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .hidden-message.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .message-text {
+            color: #333;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        
+        .signature {
+            font-style: italic;
+            margin-top: 20px;
+            color: #e91e63;
+            font-weight: bold;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            color: #e91e63;
+            opacity: 0;
+            animation: float 4s ease-in infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>For Will salim🗿</h1>
+        
+        <div class="heart" id="heart">❤️</div>
+        
+        <p>teken heart nya</p>
+        
+        <div class="hidden-message" id="hiddenMessage">
+            <p class="message-text">
+                lopyuu🤭<br><br>
+                
+            </p>
+            <p class="signature">udh itu aja</p>
+        </div>
+    </div>
+    
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <script>
+        const heart = document.getElementById('heart');
+        const hiddenMessage = document.getElementById('hiddenMessage');
+        const floatingHearts = document.getElementById('floatingHearts');
+        
+        heart.addEventListener('click', function() {
+            hiddenMessage.classList.add('show');
+            createHearts();
+        });
+        
+        function createHearts() {
+            // Hentikan jika sudah ada animasi
+            if (floatingHearts.innerHTML !== '') return;
+            
+            // Buat hati-harti melayang
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = 3 + Math.random() * 3 + 's';
+                    floatingHearts.appendChild(heart);
+                    
+                    // Hapus elemen setelah animasi selesai
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 200);
+            }
+            
+            // Setelah 10 detik, reset agar bisa diklik lagi
+            setTimeout(() => {
+                floatingHearts.innerHTML = '';
+            }, 10000);
+        }
+    </script>
+</body>
+</html>
