@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Kamu Sayang</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        
+        h1 {
+            color: #ff6b81;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+        
+        p {
+            color: #555;
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .heart {
+            color: #ff6b81;
+            font-size: 1.5em;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .flower {
+            position: absolute;
+            font-size: 20px;
+            color: #ff6b81;
+            opacity: 0.7;
+            animation: falling linear infinite;
+            z-index: 1;
+        }
+        
+        @keyframes falling {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        button {
+            background-color: #ff6b81;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #ff4757;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Untuk <span id="name">Sayangku</span> <span class="heart">❤</span></h1>
+        
+        <p>Setiap hari bersamamu adalah hadiah terindah dalam hidupku.</p>
+        
+        <p>Kamu membuat dunia lebih cerah dengan senyumanmu, lebih hangat dengan kasih sayangmu, dan lebih berarti dengan cintamu.</p>
+        
+        <p>Aku bersyukur bisa memilikimu dalam hidupku. Tak ada hari yang berlalu tanpa aku memikirkan betapa beruntungnya aku memilikimu.</p>
+        
+        <p class="special-message">Aku mencintaimu lebih dari kata-kata bisa ungkapkan <span class="heart">❤</span></p>
+        
+        <button onclick="showMoreMessages()">Klik untuk pesan lebih</button>
+    </div>
+
+    <script>
+        // Membuat bunga jatuh
+        function createFlowers() {
+            const flowerEmojis = ['🌸', '🌹', '🌺', '🌻', '🌼', '🌷', '💐', '🏵️'];
+            const numFlowers = 15;
+            
+            for (let i = 0; i < numFlowers; i++) {
+                setTimeout(() => {
+                    const flower = document.createElement('div');
+                    flower.className = 'flower';
+                    flower.innerHTML = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+                    
+                    // Posisi acak
+                    flower.style.left = Math.random() * 100 + 'vw';
+                    
+                    // Durasi dan ukuran acak
+                    const duration = Math.random() * 5 + 5;
+                    const size = Math.random() * 20 + 10;
+                    flower.style.fontSize = size + 'px';
+                    flower.style.animationDuration = duration + 's';
+                    
+                    document.body.appendChild(flower);
+                    
+                    // Hapus elemen setelah selesai animasi
+                    setTimeout(() => {
+                        flower.remove();
+                    }, duration * 1000);
+                }, i * 500);
+            }
+        }
+        
+        // Buat bunga secara periodik
+        setInterval(createFlowers, 3000);
+        
+        // Tampilkan pesan tambahan saat tombol diklik
+        function showMoreMessages() {
+            const messages = [
+                "Kamu adalah mimpi yang menjadi kenyataan.",
+                "Aku tidak bisa membayangkan hidup tanpamu.",
+                "Setiap momen bersamamu adalah harta karun bagiku.",
+                "Kamu membuatku menjadi versi terbaik dari diriku sendiri.",
+                "Cintaku padamu tumbuh lebih kuat setiap harinya.",
+                "Dunia terasa lebih indah karena ada kamu di dalamnya."
+            ];
+            
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            
+            const newMessage = document.createElement('p');
+            newMessage.innerHTML = randomMessage;
+            newMessage.style.animation = 'fadeIn 1s ease-in';
+            
+            const container = document.querySelector('.container');
+            const button = document.querySelector('button');
+            container.insertBefore(newMessage, button);
+            
+            // Animasi kecil untuk tombol
+            button.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 300);
+        }
+        
+        // Tanyakan nama pacarnya
+        const name = prompt("Masukkan nama pacarmu:", "Sayangku");
+        if (name && name.trim() !== "") {
+            document.getElementById('name').textContent = name;
+        }
+        
+        // Mulai dengan beberapa bunga
+        createFlowers();
+    </script>
+</body>
+</html>
